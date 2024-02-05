@@ -1,0 +1,181 @@
+<!-- views/products.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #F4F3F2;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+        }
+
+        li {
+            width: 300px;
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            background-color: white;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input {
+            width: 50px;
+            margin-right: 10px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .count-in-cart {
+            color: #333;
+            font-weight: bold;
+        }
+
+        header {
+            background-color: #333;
+            padding: 15px 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .center {
+            justify-content: center;
+            display: flex;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .right-menu {
+            margin-left: auto;
+        }
+
+        .right-menu a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            margin-left: 20px;
+        }
+
+        .right-menu a:hover {
+            border-bottom: 2px solid #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="center">
+                <div class="logo">
+                    <h2>Products</h2>
+                </div>
+                <div class="right-menu">
+                    <a href="/cart">Cart</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        </nav>
+    </header>
+
+    <ul>
+        <% products.forEach(product=> { %>
+            <li>
+                <h3>
+                    <%= product.name %>
+                </h3>
+                <img src="<%= product.image %>" alt="<%= product.name %> Image">
+                <p>
+                    <%= product.description %>
+                </p>
+                <p>Price: $<%= product.price %>
+                </p>
+                <p>Category: <%= product.category %>
+                </p>
+                <!-- Display count in cart -->
+                </p>
+                <!-- Add to Cart Form -->
+                <form method="post" action="/addToCart">
+                    <input type="hidden" name="productId" value="<%= product._id %>">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" value="1" min="1" required>
+                    <button type="submit">Add to Cart</button>
+                </form>
+
+            </li>
+            <% }); %>
+    </ul>
+</body>
+
+</html>

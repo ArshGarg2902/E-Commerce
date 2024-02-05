@@ -1,0 +1,75 @@
+<!-- checkout.ejs -->
+<!-- checkout.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+    form {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Checkout</h1>
+    <ul>
+      <% cart.forEach(item => { %>
+        <li>
+          <strong><%= item.product.name %></strong> - 
+          Quantity: <%= item.quantity %> - 
+          Price: $<%= item.product.price * item.quantity %>
+        </li>
+      <% }); %>
+    </ul>
+    <p><strong>Total:</strong> $<%= total %></p>
+
+    <form action="/checkout" method="POST">
+      <!-- Add any necessary form fields for payment details or confirmation -->
+      <input type="hidden" name="total" value="<%= total %>">
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+</body>
+</html>
